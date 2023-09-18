@@ -11,7 +11,7 @@ func (app *App) Handler(ctx *fiber.Ctx) error {
 	i := 0
 
 	for b := 0; b < 50000; b++ {
-		array := app.Arrays[b%len(app.Arrays)]
+		array := app.Arrays[b%len(app.Arrays)][:]
 
 		for j := range array {
 			if array[j] == "qw2" {
@@ -24,7 +24,7 @@ func (app *App) Handler(ctx *fiber.Ctx) error {
 	time.Sleep(10 * time.Millisecond)
 
 	for b := 0; b < 50000; b++ {
-		array := app.Arrays[b%len(app.Arrays)]
+		array := app.Arrays[b%len(app.Arrays)][:]
 
 		for j := range array {
 			if array[j] == "qw5" {
@@ -37,7 +37,7 @@ func (app *App) Handler(ctx *fiber.Ctx) error {
 	time.Sleep(10 * time.Millisecond)
 
 	for b := 0; b < 50000; b++ {
-		array := app.Arrays[b%len(app.Arrays)]
+		array := app.Arrays[b%len(app.Arrays)][:]
 
 		for j := range array {
 			if array[j] == "qw8" {

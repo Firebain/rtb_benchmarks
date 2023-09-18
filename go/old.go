@@ -2,7 +2,6 @@ package main
 
 import (
 	"net/http"
-	"slices"
 	"time"
 
 	"github.com/goccy/go-json"
@@ -12,7 +11,7 @@ func (app *App) HandlerOld(w http.ResponseWriter, r *http.Request) {
 	i := 0
 
 	for b := 0; b < 50000; b++ {
-		array := app.Arrays[b%len(app.Arrays)]
+		array := app.Arrays[b%len(app.Arrays)][:]
 
 		for j := range array {
 			if array[j] == "qw2" {
@@ -26,7 +25,7 @@ func (app *App) HandlerOld(w http.ResponseWriter, r *http.Request) {
 	time.Sleep(10 * time.Millisecond)
 
 	for b := 0; b < 50000; b++ {
-		array := app.Arrays[b%len(app.Arrays)]
+		array := app.Arrays[b%len(app.Arrays)][:]
 
 		for j := range array {
 			if array[j] == "qw5" {
@@ -40,9 +39,8 @@ func (app *App) HandlerOld(w http.ResponseWriter, r *http.Request) {
 	time.Sleep(10 * time.Millisecond)
 
 	for b := 0; b < 50000; b++ {
-		array := app.Arrays[b%len(app.Arrays)]
+		array := app.Arrays[b%len(app.Arrays)][:]
 
-		slices.Contains(array, "123")
 		for j := range array {
 			if array[j] == "qw8" {
 				i++
