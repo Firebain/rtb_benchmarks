@@ -1,21 +1,13 @@
 package main
 
-import (
-	"net/http"
-	"time"
+import "time"
 
-	"github.com/goccy/go-json"
-)
-
-type Result struct {
-	Result int `json:"result"`
+func main() {
+	// runOld()
+	runNew()
 }
 
-type App struct {
-	Arrays [][]string
-}
-
-func (app *App) Handler(w http.ResponseWriter, r *http.Request) {
+func testable(app App) Result {
 	i := 0
 
 	for b := 0; b < 50000; b++ {
@@ -24,7 +16,6 @@ func (app *App) Handler(w http.ResponseWriter, r *http.Request) {
 		for j := range array {
 			if array[j] == "qw2" {
 				i++
-
 				break
 			}
 		}
@@ -38,7 +29,6 @@ func (app *App) Handler(w http.ResponseWriter, r *http.Request) {
 		for j := range array {
 			if array[j] == "qw5" {
 				i++
-
 				break
 			}
 		}
@@ -52,41 +42,12 @@ func (app *App) Handler(w http.ResponseWriter, r *http.Request) {
 		for j := range array {
 			if array[j] == "qw8" {
 				i++
-
 				break
 			}
 		}
 	}
 
-	err := json.NewEncoder(w).Encode(Result{
+	return Result{
 		Result: i,
-	})
-
-	if err != nil {
-		panic(err)
 	}
-}
-
-func main() {
-	app := App{
-		Arrays: make([][]string, 0),
-	}
-
-	for i := 0; i < 20; i++ {
-		if i%2 == 0 {
-			app.Arrays = append(app.Arrays, []string{"qw1", "qw2", "qw3", "qw4", "qw5"})
-		} else {
-			app.Arrays = append(app.Arrays, []string{"qw5", "qw4", "qw3", "qw2", "qw1"})
-		}
-	}
-
-	http.HandleFunc("/", app.Handler)
-
-	err := http.ListenAndServe(":8080", nil)
-
-	if err != nil {
-		panic(err)
-	}
-
-	println(1)
 }
